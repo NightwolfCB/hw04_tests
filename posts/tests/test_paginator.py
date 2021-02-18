@@ -17,7 +17,7 @@ class YatubePaginatorTest(TestCase):
         )
         for post_num in range(number_of_posts):
             Post.objects.create(
-                text='da ya '*post_num,
+                text='da ya ' * post_num,
                 author=cls.user,
                 group=cls.group
             )

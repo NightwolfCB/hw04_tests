@@ -9,14 +9,14 @@ class YatubeModelTest(TestCase):
         super().setUpClass()
         cls.user = User.objects.create()
         cls.post = Post.objects.create(
-            text='А'*200,
+            text='А' * 200,
             author=cls.user
         )
         cls.group = Group.objects.create(
             id=1,
-            title='Б'*200,
+            title='Б' * 200,
             slug='test_group',
-            description='В'*200
+            description='В' * 200
         )
 
     def test_post_verbose_name(self):
