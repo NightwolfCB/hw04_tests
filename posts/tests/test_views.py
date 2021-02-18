@@ -29,7 +29,7 @@ class YatubeViewTests(TestCase):
         """URL-адрес использует соответствующий шаблон."""
         templates_pages_names = {
             'index.html': reverse('posts:index'),
-            'new.html': reverse('posts:new_post'), # noqa
+            'new.html': reverse('posts:new_post'),  # noqa
             'group.html': (
                 reverse('posts:group', kwargs={'slug': self.group.slug})
             ),
@@ -39,7 +39,7 @@ class YatubeViewTests(TestCase):
             'posts/profile.html':
                 reverse('posts:profile',
                         kwargs={'username': self.user.username}),
-            'new.html': # noqa
+            'new.html':  # noqa
                 reverse('posts:post_edit',
                         kwargs={'username': self.user.username,
                                 'post_id': 1})

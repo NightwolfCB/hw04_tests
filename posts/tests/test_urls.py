@@ -47,10 +47,10 @@ class YatubeURLTest(TestCase):
         templates_url_names = {
             'index.html': '/',
             'group.html': f'/group/{self.group.slug}/',
-            'new.html': '/new/', # noqa
+            'new.html': '/new/',  # noqa
             'posts/post.html': f'/{self.user.username}/{self.post.id}/',
             'posts/profile.html': f'/{self.user.username}/',
-            'new.html': f'/{self.user.username}/{self.post.id}/edit/' # noqa
+            'new.html': f'/{self.user.username}/{self.post.id}/edit/'  # noqa
         }
         for template, reverse_name in templates_url_names.items():
             with self.subTest():
