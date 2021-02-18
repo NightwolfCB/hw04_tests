@@ -29,7 +29,7 @@ class YatubeViewTests(TestCase):
         """URL-адрес использует соответствующий шаблон."""
         templates_pages_names = {
             'index.html': reverse('posts:index'),
-            'new.html': reverse('posts:new_post'),
+            'new.html': reverse('posts:new_post'), # noqa
             'group.html': (
                 reverse('posts:group', kwargs={'slug': self.group.slug})
             ),
@@ -39,7 +39,7 @@ class YatubeViewTests(TestCase):
             'posts/profile.html':
                 reverse('posts:profile',
                         kwargs={'username': self.user.username}),
-            'new.html':
+            'new.html': # noqa
                 reverse('posts:post_edit',
                         kwargs={'username': self.user.username,
                                 'post_id': 1})
@@ -56,11 +56,11 @@ class YatubeViewTests(TestCase):
         post_author_0 = response.context.get('page')[0].author
         self.assertEqual(post_text_0, self.post.text)
         self.assertEqual(post_author_0.username, self.user.username)
-    
+
     def test_group_pages_show_correct_context(self):
         """Шаблон group сформирован с правильным контекстом."""
         response = self.authorized_client.get(
-                reverse('posts:group', kwargs={'slug': self.group.slug})
+            reverse('posts:group', kwargs={'slug': self.group.slug})
         )
         self.assertEqual(response.context.get('group').title, self.group.title)
         self.assertEqual(response.context.get('group').description,
@@ -96,7 +96,7 @@ class YatubeViewTests(TestCase):
             description='Падение шансонье'
         )
         response_wrong = self.authorized_client.get(
-                reverse('posts:group', kwargs={'slug': group_wrong.slug})
+            reverse('posts:group', kwargs={'slug': group_wrong.slug})
         )
         self.assertNotIn(self.post, response_wrong.context['posts'])
 
@@ -112,7 +112,7 @@ class YatubeViewTests(TestCase):
             with self.subTest(value=value):
                 form_field = response.context.get('form').fields.get(value)
                 self.assertIsInstance(form_field, expected)
-    
+
     def test_profile_page_show_correct_context(self):
         """Шаблон профиля пользователя сформирован с правильным контекстом"""
         response = self.authorized_client.get(f'/{self.user.username}/')
