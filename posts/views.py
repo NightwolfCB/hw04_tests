@@ -14,14 +14,20 @@ def index(request):
     return render(
         request,
         'index.html',
-        {'page': page}
+        {'page': page, 'paginator': paginator}
     )
 
 
 def group_posts(request, slug):
     group = get_object_or_404(Group, slug=slug)
     posts = group.posts.all()[:11]
-    return render(request, 'group.html', {'group': group, 'posts': posts})
+    return render(request, 'group.html', {
+        'group': group,
+        'posts': posts,
+        'page': page,
+        'paginator': paginator
+        }
+    )
 
 
 @login_required
@@ -43,6 +49,7 @@ def profile(request, username):
     page = paginator.get_page(page_number)
     context = {
         'page': page,
+        'paginator': paginator,
         'posts_latest': posts_latest,
         'author': author
     }
