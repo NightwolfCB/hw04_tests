@@ -23,7 +23,7 @@ def group_posts(request, slug):
     posts = group.posts.all()[:11]
     return render(request, 'group.html', {
         'group': group,
-        'posts': posts        
+        'posts': posts
     })
 
 
