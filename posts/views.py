@@ -23,11 +23,8 @@ def group_posts(request, slug):
     posts = group.posts.all()[:11]
     return render(request, 'group.html', {
         'group': group,
-        'posts': posts,
-        'page': page,
-        'paginator': paginator
-        }
-    )
+        'posts': posts        
+    })
 
 
 @login_required
