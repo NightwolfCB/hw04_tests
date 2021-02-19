@@ -21,9 +21,14 @@ def index(request):
 def group_posts(request, slug):
     group = get_object_or_404(Group, slug=slug)
     posts = group.posts.all()[:11]
+    paginator = Paginator(post_list, 10)
+    page_number = request.GET.get("page")
+    page = paginator.get_page(page_number)
     return render(request, 'group.html', {
         'group': group,
-        'posts': posts
+        'posts': posts,
+        'page': page,
+        'paginator': paginator
     })
 
 
