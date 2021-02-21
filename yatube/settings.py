@@ -42,11 +42,14 @@ MIDDLEWARE = [
 ROOT_URLCONF = 'yatube.urls'
 
 TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
+INCLUDES_DIR = os.path.join(BASE_DIR, 'templates/includes')
+
+PAGE_SIZE = 10
 
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': ['templates'],
+        'DIRS': [TEMPLATES_DIR, INCLUDES_DIR],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -103,5 +106,5 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 LOGIN_URL = "/auth/login/"
-LOGIN_REDIRECT_URL = "index"
+LOGIN_REDIRECT_URL = "posts:index"
 EMAIL_BACKEND = 'django.core.mail.backends.XXX'

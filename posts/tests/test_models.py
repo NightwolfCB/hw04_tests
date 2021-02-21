@@ -13,7 +13,6 @@ class YatubeModelTest(TestCase):
             author=cls.user
         )
         cls.group = Group.objects.create(
-            id=1,
             title='Б' * 200,
             slug='test_group',
             description='В' * 200

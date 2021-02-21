@@ -35,14 +35,14 @@ class YatubeViewTests(TestCase):
             ),
             'posts/post.html':
                 reverse('posts:post', kwargs={'username': self.user.username,
-                                              'post_id': 1}),
+                                              'post_id': self.post.id}),
             'posts/profile.html':
                 reverse('posts:profile',
                         kwargs={'username': self.user.username}),
             'posts/post_edit.html':
                 reverse('posts:post_edit',
                         kwargs={'username': self.user.username,
-                                'post_id': 1})
+                                'post_id': self.post.id})
         }
         for template, reverse_name in templates_pages_names.items():
             with self.subTest(reverse_name=reverse_name):

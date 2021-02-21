@@ -22,7 +22,7 @@ class YatubeFormTests(TestCase):
         """Валидная форма создает запись в Post"""
         posts_count = Post.objects.count()
         form_data = {
-            'text': 'Старые навыки не пропадают, понимаешь.',
+            'text': 'Раз, два и три.',
             'group': self.group.id
         }
         response = self.authorized_client.post(
@@ -32,13 +32,15 @@ class YatubeFormTests(TestCase):
         )
         self.assertRedirects(response, reverse('posts:index'))
         self.assertEqual(Post.objects.count(), posts_count + 1)
-        self.assertTrue(Post.objects.filter(group=self.group.id).exists())
+        self.assertTrue(Post.objects.filter(
+            group=self.group.id, 
+            text='Раз, два и три.').exists())
         self.assertEqual(response.status_code, 200)
 
     def test_edit_post(self):
         """При редактировании поста, изменяется запись в базе данных."""
         form_data = {
-            'text': 'Измененный пост',
+            'text': 'Измененный текст',
             'group': self.group.id,
         }
         test_post = Post.objects.create(
@@ -53,6 +55,7 @@ class YatubeFormTests(TestCase):
             follow=True
         )
         self.assertEqual(Post.objects.count(), posts_count)
-        self.assertRedirects(response,
-                             f'/{self.user.username}/{test_post.id}/')
+        self.assertTrue(Post.objects.filter(group=self.group.id).exists())
+        self.assertTrue(Post.objects.filter(text='Измененный текст').exists())
+        self.assertRedirects(response, reverse('posts:post', kwargs=kwargs))
         self.assertEqual(response.status_code, 200)
