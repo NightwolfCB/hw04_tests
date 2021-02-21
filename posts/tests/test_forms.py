@@ -33,7 +33,7 @@ class YatubeFormTests(TestCase):
         self.assertRedirects(response, reverse('posts:index'))
         self.assertEqual(Post.objects.count(), posts_count + 1)
         self.assertTrue(Post.objects.filter(
-            group=self.group.id, 
+            group=self.group.id,
             text='Раз, два и три.').exists())
         self.assertEqual(response.status_code, 200)
 
@@ -55,7 +55,8 @@ class YatubeFormTests(TestCase):
             follow=True
         )
         self.assertEqual(Post.objects.count(), posts_count)
-        self.assertTrue(Post.objects.filter(group=self.group.id).exists())
-        self.assertTrue(Post.objects.filter(text='Измененный текст').exists())
+        self.assertTrue(Post.objects.filter(
+            group=self.group.id,
+            text='Измененный текст').exists())
         self.assertRedirects(response, reverse('posts:post', kwargs=kwargs))
         self.assertEqual(response.status_code, 200)
